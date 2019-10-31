@@ -7,8 +7,8 @@ from dash.dependencies import Input, Output
 
 import pandas as pd
 
-url = 'https://raw.githubusercontent.com/AntiDeprime/whitecounter/master/data.csv'
-df = pd.read_csv(url, parse_dates=['date'], usecols=['date', 'name', 'count', 'coord'])
+#url = 'https://raw.githubusercontent.com/AntiDeprime/whitecounter/master/data.csv'
+df = pd.read_csv('./data.csv', parse_dates=['date'], usecols=['date', 'name', 'count', 'coord'])
 df.dropna(inplace=True)
 
 df[['lat', 'lon']] = df['coord'].str.split(', ' ,expand=True).astype('float')
