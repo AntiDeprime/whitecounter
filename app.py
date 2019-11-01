@@ -24,8 +24,30 @@ df['Y'] = df.date.dt.year
 
 token = 'pk.eyJ1IjoiYW50aWRlcHJpbWUiLCJhIjoiY2syYzBwdXVxMDl3eDNicW9pbTE2dzJ5MCJ9.3_OL4GUnwOryXefKh73ZVw'
 px.set_mapbox_access_token(token)
-fig = px.scatter_mapbox(df, lat="lat", lon="lon",  color="count", size="count",
-                  color_continuous_scale=px.colors.cyclical.IceFire, size_max=15, zoom=10, animation_frame='date_str',  )
+
+
+fig = px.scatter_mapbox(df, 
+                        lat="lat", 
+                        lon="lon",  
+                        color="count", 
+                        size="count",
+                        color_continuous_scale=px.colors.cyclical.IceFire, 
+                        size_max=15, 
+                        zoom=10, 
+                        #animation_frame='date_str',  
+                        )
+
+df_q_sum = df1.resample('Q').sum().reset_index()
+df_q_count = df1.resample('Q').count().reset_index()
+
+hist = px.line(df_q_sum, 
+                x="date", 
+                y='count', 
+                line_shape="spline",)
+
+hist.layout.height = 200
+
+
 
 app = dash.Dash(
     __name__, external_stylesheets=["https://codepen.io/chriddyp/pen/bWLwgP.css"]
@@ -33,13 +55,31 @@ app = dash.Dash(
 
 app.layout = html.Div(
     [
-        html.H1("White Counter Protests Data"),
-        dcc.Graph(id="graph", style={"width": "75%", "display": "inline-block"},
 
-        figure=fig 
-        )
+
+        html.H1("White Counter Protests Data"),
+        dcc.Graph(id="graph", style={"width": "100%", "display": "inline-block"},
+        
+        #figure=fig 
+        ),
+
+        dcc.Graph(id="hist", style={"width": "100%", "display": "inline-block"},
+        
+        figure=hist 
+        ),
+
+
+
+
+        html.Button('Submit', id='button'),
     ]
 )
 
+@app.callback (
+    Output('graph', 'figure'),
+    [Input('button', 'n_clicks')]
+)
+def draw_map(n_clicks):
+    return (fig)
 
 app.run_server(debug=True)
