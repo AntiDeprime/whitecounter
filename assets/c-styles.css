@@ -1,0 +1,82 @@
+@import url('https://fonts.googleapis.com/css?family=PT+Sans:400,400i,700,700i&display=swap');
+
+html {
+    overflow: scroll;
+    overflow-x: hidden;
+    font-family: 'PT Sans', sans-serif;
+}
+::-webkit-scrollbar {
+    width: 0px;  /* Remove scrollbar space */
+    background: transparent;  /* Optional: just make scrollbar invisible */
+}
+/* Optional: show position indicator in red */
+::-webkit-scrollbar-thumb {
+    background: #FF0000;
+}
+/*
+h1 {
+    font-size: 3rem;
+    font-weight: semibold;
+}
+#summary {
+    font-size: 1.6rem;
+}
+
+@media  (max-width: 992px) {
+
+    #map {
+        position: relative;
+        width: 95vw;
+        height: 45vw;
+    }
+
+    
+    #container {
+        text-align: center;
+        margin: auto;
+    }
+
+    #columns {
+        display: flex;
+        flex-direction: column-reverse;
+        align-items: flex-start;
+    }
+
+    #left-col {
+        flex: 1 1 0;
+    }
+    #right-col {
+        flex: 1 1 0;
+        text-align: left;
+        padding: 2em;
+    }
+}
+
+
+@media  (min-width: 992px) {
+
+    #map {
+        position: relative;
+        height: 100%;
+    }
+
+    #container {
+        text-align: center;
+        margin: auto;
+        width: 950px;
+    }
+
+
+    #columns {
+        display: flex;
+    }
+
+    #left-col {
+        flex: 2.6 1 0;
+    }
+    #right-col {
+        flex: 1 1 0;
+        text-align: left;
+        padding: 5px;
+    }
+} */
