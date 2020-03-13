@@ -1,86 +1,83 @@
+# import graph and table
 import wc2
 
-wc2.show_df = wc2.show_df.drop(columns=['Ссылка'])
-
+# import Dash components 
 import dash
 import dash_html_components as html
 import dash_core_components as dcc
 from dash.dependencies import Input, Output
 import dash_table
 
-
+# Dash app configuration 
 app = dash.Dash(
     __name__, external_stylesheets=[
+        # appearance 
         "https://codepen.io/chriddyp/pen/bWLwgP.css",
          ],
+        # social icons
          external_scripts=[
         'https://kit.fontawesome.com/6b0b673ac1.js',
          ]
 )
 server = app.server
+app.title = 'White Counter'
 
-app.title = 'Белый счетчик'
-
+# App layout
 app.layout = html.Div(id='container', children=[
-    html.H1(children=['Митинги в Москве по данным Белого счетчика'], id='app-header',),
+    # Header
+    html.H1(children=['Protests in Moscow According to White Counter'], id='app-header',),
+    # Tabs 
     dcc.Tabs([
-        dcc.Tab(label='График', id='graph', children=[
-            dcc.Graph(id="polar_plot", config={'displayModeBar': False}, figure=wc2.fig,
-                         style={"height" : "50vw", "width" : "90vw"},),
-                         ]),
+        # Graph tab
+        dcc.Tab(label='Plot', id='graph', children=[
+            dcc.Graph(id="polar_plot", config={'displayModeBar': False}, figure=wc2.fig,),
+        ]),
         
-        dcc.Tab(label='Данные', children=[
+        # Data Table
+        dcc.Tab(label='Data Table', children=[
 
             dash_table.DataTable(
+                # loading data 
                 data=wc2.show_df.to_dict('records'),
                 columns=[{'id': c, 'name': c} for c in wc2.show_df.columns],
+                # fixed header
                 fixed_rows={ 'headers': True, 'data': 0 },
-
+                
+                # font, wrapping, align
                 style_cell = {
                     'font-family': 'PT Sans',
                     'font-size': '1.4rem',
                     'whiteSpace': 'normal',
                     'height': 'auto',
                     'maxWidth': 0,
-                    'textAlign': 'center'
-            },
-                    style_cell_conditional=[
-                    {'if': {'column_id': 'Дата'},
-                        'width': '15%',
-                        # 'textAlign': 'right',
-                        },
-
-                    {'if': {'column_id': 'Численность'},
-                        'width': '15%',
-                        # 'textAlign': 'right',
-                        },
-                        
-
-                    # {'if': {'column_id': 'Ссылка'},
-                    #         'overflow': 'hidden',
-                    #         'textOverflow': 'ellipsis',
-                    #         'maxWidth': 0,
-                    #         'width': '20%',},
-
-                    {'if': {'column_id': 'Местоположение (начало)'},
-                            'width': '25%',},
-
-
-
-    ],
+                    'textAlign': 'center'},
+                
+                # widths 
+                style_cell_conditional=[
+                    {'if': {'column_id': 'Date'},
+                        'width': '15%',},
+                    {'if': {'column_id': 'Attendance'},
+                        'width': '15%',},
+                    {'if': {'column_id': 'Location'},
+                        'width': '35%',},
+                ],
+                
+                # odd rows grey
                 style_data_conditional=[
-                {
-                    'if': {'row_index': 'odd'},
-                    'backgroundColor': 'rgb(248, 248, 248)'
-                }
-            ],
-            style_header={
-                'backgroundColor': 'rgb(230, 230, 230)',
-                'fontWeight': 'bold',
-                'textAlign': 'center',
-            },
-
-                style_as_list_view=True,                    
+                    {'if': {'row_index': 'odd'},
+                        'backgroundColor': 'rgb(248, 248, 248)'}
+                ],
+                
+                # format header 
+                style_header={
+                    'backgroundColor': 'rgb(230, 230, 230)',
+                    'fontWeight': 'bold',
+                    'textAlign': 'center',
+                },
+                
+                # no vertical borders 
+                style_as_list_view=True,        
+                
                 ) ,
             ]),
         ]),
@@ -88,24 +85,24 @@ app.layout = html.Div(id='container', children=[
 
     html.Div([
         html.Br(),
-        html.P(['Разработал Алексей Щетинин', 
+        html.P(['Developed by Aleksei Shchetinin', 
                     html.Br(),
                     html.A([html.I(className='far fa-envelope')], href='mailto:to@alxy.sh'),
                     ' ',
                     html.A([html.I(className='fab fa-github')], href='https://github.com/AntiDeprime'),
                     ' ',
-                    html.A([html.I(className='fab fa-telegram')], href='https://teleg.run/antideprime'),
+                    html.A([html.I(className='fab fa-telegram')], href='https://t.me/antideprime'),
                     html.Br(),
 
                 ]),
 
-        html.P(['Официальные соцсети Белого счетчика', 
+        html.P(['White Counter NGO', 
             html.Br(),
             html.A([html.I(className='fab fa-twitter')], href='https://twitter.com/WhiteCounter'),
             ' ',
             html.A([html.I(className='fab fa-facebook')], href='https://facebook.com/WhiteCounter'),
         ]),
-        html.I(['обновлено 12 марта 2020']),
+        html.I(['Last update: 2020/03/12']),
     ], id='source',)
 ])
 

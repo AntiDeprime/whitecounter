@@ -1,23 +1,27 @@
 @import url('https://fonts.googleapis.com/css?family=PT+Sans:400,400i,700,700i&display=swap');
 
 html {
-    overflow: scroll;
-    overflow-x: hidden;
     font-family: 'PT Sans', sans-serif;
+    overflow: hidden;
 }
+
+#element::-webkit-scrollbar {
+    display: none;
+}
+
+#element {
+    scrollbar-width: none;
+}
+
 ::-webkit-scrollbar {
-    width: 0px;  /* Remove scrollbar space */
     background: transparent;  /* Optional: just make scrollbar invisible */
-}
-/* Optional: show position indicator in red */
-::-webkit-scrollbar-thumb {
-    background: #FF0000;
 }
 
 h1 {
     font-size: 3rem;
     font-weight: semibold;
 }
+
 #container {
     text-align: center;
     margin: auto;
@@ -31,5 +35,9 @@ h1 {
 .tab-container {
     font-size: 2rem;
     font-weight: semibold;
+}
 
+#polar_plot {
+    height: 50vw; 
+    width: 90vw;
 }
