@@ -86,7 +86,7 @@ df.sort_values(['date'], ascending=False, inplace=True)
 show_df = df[['date', 'name', 'count', 'loc']]
 
 show_df = pd.DataFrame([df['name'], df.date.dt.strftime('%Y-%m-%d'), df['count'], df['loc']]).T
-show_df.columns = ['Name', 'Date', 'Count', 'Attendance']
+show_df.columns = ['Name', 'Date', 'Attendance', 'Location']
 
 
 # In[ ]:

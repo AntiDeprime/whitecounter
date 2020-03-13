@@ -5,9 +5,9 @@ html {
 }
 
 ::-webkit-scrollbar {
-    background: transparent;  /* Optional: just make scrollbar invisible */
-}
-
+    display: none;
+  }
+  
 h1 {
     font-size: 3rem;
     font-weight: semibold;
@@ -31,9 +31,4 @@ h1 {
 #polar_plot {
     height: 50vw; 
     width: 90vw;
-}
-
-.dash-spreadsheet-container table {
-    --accent: transparent !important;
-    --selected-background:transparent !important;
 }

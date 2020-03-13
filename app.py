@@ -25,7 +25,7 @@ app.title = 'White Counter'
 # App layout
 app.layout = html.Div(id='container', children=[
     # Header
-    html.H1(children=['Protests in Moscow According to White Counter'], id='app-header',),
+    html.H1(children=['Protests in Moscow, White Counter Historical Data'], id='app-header',),
     # Tabs 
     dcc.Tabs([
         # Graph tab
